@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 
 //mongoDB connection string
-const url = 'mongodb+srv://user:<password>@node-api-8r36a.mongodb.net/test?retryWrites=true';
+const url = `mongodb+srv://user:${process.env.DB_PASS}<password>@node-api-8r36a.mongodb.net/test?retryWrites=true`;
 
 server.get('/', (req, res) => {
   try {
