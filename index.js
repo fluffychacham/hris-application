@@ -5,6 +5,9 @@ require("dotenv").config();
 // Initialize MongoDB
 require("./models/mongoose");
 
+// Middlewares
+require("./middlewares")(server);
+
 server.get("/", (req, res) => {
   try {
     res.status(200).json({ message: "Root endpoint is functional." });
