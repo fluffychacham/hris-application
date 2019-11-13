@@ -5,7 +5,7 @@ var companies = new mongoose.Schema({
     type: String,
     required: true
   },
-  email: {
+  domain: {
     type: String,
     required: true
   },
