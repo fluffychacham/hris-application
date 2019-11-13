@@ -1,22 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 var userSchema = new mongoose.Schema({
   firstName: {
-    type: String
+    type: String,
+    required: true
   },
   lastName: {
-    type: String
+    type: String,
+    required: true
   },
   email: {
-    type: String
+    type: String,
+    required: true
   },
   password: {
-    type: String
+    type: String,
+    required: true
   },
-  role: {
-    type: String
-  },
-})
+  role: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "roles"
+    }
+  ],
+  company: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "companies"
+    }
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
 
-
-mongoose.model('Users', userSchema)
+mongoose.model("Users", userSchema);
