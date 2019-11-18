@@ -32,14 +32,9 @@ passport.use(
     {
       usernameField: "email",
       passwordField: "password",
-      session: false,
-      passReqToCallback: true
+      session: false
     },
-    (req, email, password, done) => {
-      let companyName = req.body.companyName,
-        domainName = req.body.domainName,
-        firstName = req.body.firstName,
-        lastName = req.body.lastName;
+    (email, password, done) => {
       try {
         // TODO find user in the database if it exists
         // TODO if user does not exist, store user info to database
@@ -52,7 +47,7 @@ passport.use(
 );
 
 const jwtOptions = {
-  jwtFromRequest: jwtExtract.fromAuthHeaderWithScheme("JWT"),
+  jwtFromRequest: jwtExtract.fromAuthHeaderWithScheme("Bearer"),
   secretOrKey: jwtSecret
 };
 
