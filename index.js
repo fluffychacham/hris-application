@@ -2,6 +2,9 @@ const express = require("express");
 const server = express();
 require("dotenv").config();
 
+// Config
+require("./config/passport");
+
 // Models
 require("./models/mongoose");
 
