@@ -10,11 +10,11 @@
 
 #### User
 
-    - login: `user/login`
-    - register: `user/register`
-    - delete user: `user/delete`
-    - update user: `user/update`
-    - find user: `user/find`
+- login: `user/login`
+- register: `user/register`
+- delete user: `user/delete`
+- update user: `user/update`
+- find user: `user/find`
 
 ---
 
