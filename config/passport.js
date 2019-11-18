@@ -1,6 +1,5 @@
 // Passport Local and Passport
-import bcrypt from "bcrypt";
-
+const bcrypt = require("bcrypt");
 const passport = require("passport"),
   local = require("passport-local"),
   jwtStrategy = require("passport-jwt").Strategy,

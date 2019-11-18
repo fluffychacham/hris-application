@@ -1,3 +1,7 @@
-const schema = require("../middlewares/gql");
+const router = require("express").Router();
 
-module.exports = function(server) {};
+router.get("/", (req, res, next) => {
+  res.json({ message: "you are in API" });
+});
+
+module.exports = router;
