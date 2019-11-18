@@ -9,7 +9,7 @@ module.exports = server => {
       }
       if (info !== undefined) {
         console.log(info.message);
-        res.send(info.message);
+        apiResponse.success(res, info.message);
       } else {
         req.logIn(user, err => {
           const data = {
