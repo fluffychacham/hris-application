@@ -18,6 +18,13 @@
 
 ---
 
+## Migrating DB tables to local docker container
+
+---
+
+1. `npx run migrate:latest`
+2. `npx run seed:run`
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
