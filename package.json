@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "jest --config ./jest.config.json"
   },
   "repository": {
@@ -18,12 +19,17 @@
     "nodemon": "^1.19.4"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.1",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^7.12.1"
   }

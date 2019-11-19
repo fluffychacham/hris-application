@@ -1,5 +1,4 @@
-module.exports = function(server) {
-  require("./cors")(server);
-  require("./jwt")(server);
-  require("./auth")(server);
-};
+const app = require("../index");
+
+require("./cors")(app.server);
+require("./auth")(app.server);
