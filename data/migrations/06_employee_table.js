@@ -5,7 +5,7 @@ exports.up = function (knex) {
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('companies')
+      .inTable('company')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
     
@@ -13,13 +13,19 @@ exports.up = function (knex) {
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('roles')
+      .inTable('role')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
-    tbl.string('full_name', 128).notNullable();
+    tbl.string('first_name', 128).notNullable();
+    tbl.string('last_name', 128).notNullable();
     tbl
       .string('email', 256)
       .notNullable();
+    tbl
+      .string('password', 128)
+      .notNullable();
+    tbl
+      .string('role')
   });
 };
 
