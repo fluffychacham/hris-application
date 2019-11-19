@@ -1,7 +1,6 @@
 exports.up = function (knex) {
-  return knex.schema.createTable('admin', (tbl) => {
+  return knex.schema.createTable('user', (tbl) => {
     tbl.increments();
-
     tbl.integer('company_id')
       .unsigned()
       .notNullable()
@@ -17,22 +16,19 @@ exports.up = function (knex) {
       .inTable('role')
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
-    tbl.string('username', 128)
-      .unique()
-      .notNullable();
-    tbl
-      .string('first_name', 32)
-      .notNullable();
-    tbl
-      .string('last_name',32)
-      .notNullable();
+    tbl.string('first_name', 128).notNullable();
+    tbl.string('last_name', 128).notNullable();
     tbl
       .string('email', 256)
-      .unique()
       .notNullable();
+    tbl
+      .string('password', 128)
+      .notNullable();
+    tbl
+      .string('role')
   });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists('admin');
+  return knex.schema.dropTableIfExists('user');
 };
