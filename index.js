@@ -1,23 +1,19 @@
 const express = require("express");
 const server = express();
+exports.server = server;
 require("dotenv").config();
 
 // Config
 require("./config/passport");
 
-// Models
-require("./models/mongoose");
-
 // Middlewares
-require("./middlewares")(server);
+require("./middlewares");
 
 // Routes
-require("./routes")(server);
+server.use("/", require("./routes"));
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => {
   const serverRunMsg = `Server is active and listening on http://127.0.0.1:${port}`;
   console.log(serverRunMsg);
 });
-
-module.exports = server;
