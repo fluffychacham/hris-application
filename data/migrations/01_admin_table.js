@@ -24,7 +24,7 @@ exports.up = function (knex) {
       .string('first_name', 32)
       .notNullable();
     tbl
-      .string('last_name' 32)
+      .string('last_name',32)
       .notNullable();
     tbl
       .string('email', 256)
