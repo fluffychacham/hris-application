@@ -1,9 +1,11 @@
 // Passport Local and Passport
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const passport = require("passport"),
   local = require("passport-local"),
   jwtStrategy = require("passport-jwt").Strategy,
   jwtExtract = require("passport-jwt").ExtractJwt;
+
+const User = require("../models/users/users.model");
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -15,16 +17,24 @@ passport.use(
       passwordField: "password",
       session: false
     },
-    (email, password, done) => {
+    async (email, password, done) => {
       try {
-        // TODO find user in the database if it exists
+        let userExists = await User.query()
+          .where("email", email)
+          .where("password", password);
+
+        if (userExists.length > 0) {
+          return done(null, true);
+        } else {
+          return done(null, false);
+        }
       } catch (err) {
-        done(err);
+        console.log(err);
+        return done(null, false);
       }
     }
   )
 );
-
 passport.use(
   "register",
   new local(
@@ -46,7 +56,7 @@ passport.use(
 );
 
 const jwtOptions = {
-  jwtFromRequest: jwtExtract.fromAuthHeaderWithScheme("Bearer"),
+  jwtFromRequest: jwtExtract.fromAuthHeaderAsBearerToken(),
   secretOrKey: jwtSecret
 };
 

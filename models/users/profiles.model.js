@@ -23,3 +23,5 @@ class UserProfile extends Model {
     };
   }
 }
+
+module.exports = UserProfile;

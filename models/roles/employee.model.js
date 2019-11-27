@@ -52,3 +52,4 @@ class EmployeeProfile extends Model {
     };
   }
 }
+module.exports = EmployeeProfile;

@@ -43,3 +43,4 @@ class OwnerProfile extends Model {
     };
   }
 }
+module.exports = OwnerProfile;

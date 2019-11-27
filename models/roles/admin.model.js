@@ -43,3 +43,4 @@ class AdminProfile extends Model {
     };
   }
 }
+module.exports = AdminProfile;

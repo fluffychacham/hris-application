@@ -21,3 +21,4 @@ class EmployeePermissions extends Model {
     };
   }
 }
+module.exports = EmployeePermissions;

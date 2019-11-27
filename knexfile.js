@@ -1,40 +1,40 @@
 // Update with your config settings.
-require('dotenv').config({ path: '/.env'})
+require("dotenv").config({ path: "/.env" });
 module.exports = {
   development: {
-    client: 'pg',
+    client: "pg",
     connection: {
-      database: 'postgres',
-      user: 'postgres',
-      password: 'postgres',
-      host: 'localhost',
+      database: "postgres",
+      user: "postgres",
+      password: "postgres",
+      host: "localhost",
       port: 5432
     },
     migrations: {
-      directory: './data/migrations'
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './data/seeds'
+      directory: "./data/seeds"
     }
   },
   test: {
-    client: 'pg',
+    client: "pg",
     connection: {
-      database: 'postgres',
-      user: 'postgres',
-      password: 'postgres',
-      host: 'localhost',
+      database: "postgres",
+      user: "postgres",
+      password: "postgres",
+      host: "localhost",
       port: 5432
     },
     migrations: {
-      directory: './data/migrations'
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './data/seeds'
+      directory: "./data/seeds"
     }
   },
   staging: {
-    client: 'pg',
+    client: "pg",
     // eslint-disable-next-line linebreak-style
     // deploy stage
     connection: {
@@ -48,14 +48,14 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './data/migrations'
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './data/seeds'
+      directory: "./data/seeds"
     }
   },
   production: {
-    client: 'pg',
+    client: "pg",
     connection: {
       host: process.env.PG_HOST,
       user: process.env.PG_USER,
@@ -67,10 +67,10 @@ module.exports = {
       max: 10
     },
     migrations: {
-      directory: './data/migrations'
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: './data/seeds'
+      directory: "./data/seeds"
     }
   }
 };

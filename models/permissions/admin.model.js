@@ -28,3 +28,4 @@ class AdminPermissions extends Model {
     };
   }
 }
+module.exports = AdminPermissions;

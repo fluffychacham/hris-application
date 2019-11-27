@@ -36,3 +36,4 @@ class Company extends Model {
     };
   }
 }
+module.exports = Company;
