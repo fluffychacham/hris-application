@@ -12,7 +12,6 @@ exports.up = function(knex) {
       .notNullable();
     tbl
       .integer("user_profile")
-      .notNullable()
       .references("id")
       .inTable("user_profile")
       .onDelete("CASCADE")

@@ -3,10 +3,7 @@ exports.up = function(knex) {
     tbl.increments();
     tbl.string("first_name", 256).notNullable();
     tbl.string("last_name", 256).notNullable();
-    tbl
-      .string("company_email", 256)
-      .unique()
-      .notNullable();
+    tbl.string("company_email", 256).unique();
     tbl
       .date("date_created")
       .defaultTo(knex.fn.now(6))

@@ -19,15 +19,22 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        let userExists = await User.query()
-          .where("email", email)
-          .where("password", password);
-
-        if (userExists.length > 0) {
-          return done(null, true);
-        } else {
+        let userExists = await User.query().where("email", email);
+        if (userExists.length <= 0) {
           return done(null, false);
         }
+        let dbPassword = await User.query()
+          .select("user.password")
+          .where("email", email);
+        bcrypt.compare(password, dbPassword[0].password, (err, res) => {
+          if (err) {
+            console.log(err);
+          }
+          if (res) {
+            return done(null, true);
+          }
+          return done(null, false);
+        });
       } catch (err) {
         console.log(err);
         return done(null, false);
@@ -43,13 +50,32 @@ passport.use(
       passwordField: "password",
       session: false
     },
-    (email, password, done) => {
+    async (email, password, done) => {
       try {
-        // TODO find user in the database if it exists
-        // TODO if user does not exist, store user info to database
-        // TODO hash password with bcrypt and store encrypted password to database
+        let userExists = await User.query().where("email", email);
+        if (userExists.length > 0) {
+          return done(null, false);
+        }
+        bcrypt.hash(password, 10, async (err, hash) => {
+          try {
+            if (err) {
+              return done(null, err);
+            }
+            let insertUser = await User.query().insert({
+              email: email,
+              password: hash
+            });
+            if (insertUser instanceof User) {
+              return done(null, true);
+            }
+          } catch (err) {
+            console.log(err);
+            return done(null, false);
+          }
+        });
       } catch (err) {
-        done(err);
+        console.log(err);
+        return done(null, false);
       }
     }
   )
