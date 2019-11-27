@@ -28,7 +28,7 @@ passport.use(
           .where("email", email);
         bcrypt.compare(password, dbPassword[0].password, (err, res) => {
           if (err) {
-            console.log(err);
+            return done(null, false);
           }
           if (res) {
             return done(null, true);
@@ -36,7 +36,6 @@ passport.use(
           return done(null, false);
         });
       } catch (err) {
-        console.log(err);
         return done(null, false);
       }
     }
