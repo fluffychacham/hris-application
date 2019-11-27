@@ -1,1 +1,1 @@
-exports.Empoyees = (req, res, next) => {};
+exports.Employees = (req, res, next) => {};

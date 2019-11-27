@@ -2,12 +2,21 @@
 const bcrypt = require("bcryptjs");
 const passport = require("passport"),
   local = require("passport-local"),
+  jwt = require("jsonwebtoken"),
   jwtStrategy = require("passport-jwt").Strategy,
   jwtExtract = require("passport-jwt").ExtractJwt;
 
 const User = require("../models/users/users.model");
 
-const jwtSecret = process.env.JWT_SECRET;
+const signOptions = {
+  expiresIn: "24h",
+  algorithm: "HS256"
+};
+const jwtOptions = {
+  jwtFromRequest: jwtExtract.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
+  jsonWebTokenOptions: signOptions
+};
 
 passport.use(
   "login",
@@ -31,7 +40,13 @@ passport.use(
             return done(null, false);
           }
           if (res) {
-            return done(null, true);
+            // Password match
+            let token = jwt.sign(
+              { email: email },
+              jwtOptions.secretOrKey,
+              signOptions
+            );
+            return done(null, { token: token });
           }
           return done(null, false);
         });
@@ -58,7 +73,7 @@ passport.use(
         bcrypt.hash(password, 10, async (err, hash) => {
           try {
             if (err) {
-              return done(null, err);
+              return done(null, false);
             }
             let insertUser = await User.query().insert({
               email: email,
@@ -68,31 +83,29 @@ passport.use(
               return done(null, true);
             }
           } catch (err) {
-            console.log(err);
             return done(null, false);
           }
         });
       } catch (err) {
-        console.log(err);
         return done(null, false);
       }
     }
   )
 );
 
-const jwtOptions = {
-  jwtFromRequest: jwtExtract.fromAuthHeaderAsBearerToken(),
-  secretOrKey: jwtSecret
-};
-
 passport.use(
   "jwt",
-  new jwtStrategy(jwtOptions, (jwtPayload, done) => {
+  new jwtStrategy(jwtOptions, async (jwtPayload, done) => {
     try {
       // NOTE: use User email as jwt payload
       // TODO find user if exists from jwt payload
+      let userExists = await User.query().where("email", jwtPayload.email);
+      if (userExists.length > 0) {
+        done(null, true);
+      }
+      done(null, false);
     } catch (err) {
-      done(err);
+      done(null, false);
     }
   })
 );
