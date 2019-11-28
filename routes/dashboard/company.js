@@ -1,6 +1,16 @@
 const router = require("express").Router(),
-  { Company } = require("../../controllers/dashboard/company");
+  {
+    def,
+    create,
+    view,
+    update,
+    remove
+  } = require("../../controllers/dashboard/company");
 
-router.get("/", Company);
+router.post("/create", create);
+router.get("/view", view);
+router.put("/update", update);
+router.delete("/remove", remove);
+router.use("/", def);
 
 module.exports = router;

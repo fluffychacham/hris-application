@@ -1,6 +1,16 @@
 const router = require("express").Router(),
-  { Permissions } = require("../../controllers/dashboard/permissions");
+  {
+    def,
+    create,
+    view,
+    update,
+    remove
+  } = require("../../controllers/dashboard/permissions");
 
-router.get("/", Permissions);
+router.post("/create", create);
+router.get("/view", view);
+router.put("/update", update);
+router.delete("/remove", remove);
+router.use("/", def);
 
 module.exports = router;
