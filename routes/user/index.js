@@ -1,6 +1,4 @@
-const router = require("express").Router(),
-  passport = require("passport"),
-  apiResponse = require("../../helpers/apiResponse");
+const router = require("express").Router();
 
 router.use("/login", require("./login"));
 router.use("/register", require("./register"));

@@ -1,10 +1,12 @@
-const apiResponse = require("../../helpers/apiResponse");
+const apiResponse = require("../../helpers/apiResponse"),
+  passport = require("passport"),
+  companies = require("../../models/companies/companies.model");
 
 exports.def = (req, res, next) => {
   return apiResponse.unauthorized(res, "Not Found");
 };
 exports.create = (req, res, next) => {
-  return apiResponse.success(res, "You are in create");
+  return apiResponse.success(res, "Hello " + req.body.email);
 };
 exports.view = (req, res, next) => {
   return apiResponse.success(res, "You are in view");

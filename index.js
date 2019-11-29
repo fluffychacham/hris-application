@@ -1,6 +1,7 @@
 const express = require("express"),
   server = express(),
   bodyParser = require("body-parser"),
+  passport = require("passport"),
   { Model } = require("objection"),
   knexConfig = require("./data/dbConfig");
 Model.knex(knexConfig);
@@ -9,6 +10,8 @@ require("dotenv").config();
 
 // Config
 server.use(bodyParser.json());
+server.use(passport.initialize());
+server.use(passport.session());
 require("./config/passport");
 
 // Middlewares

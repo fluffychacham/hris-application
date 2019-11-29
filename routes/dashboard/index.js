@@ -1,20 +1,8 @@
 const router = require("express").Router(),
-  passport = require("passport");
+  { Auth } = require("../../helpers/passportResponse");
 
-router.use(
-  "/company",
-  passport.authenticate("jwt", { session: false }),
-  require("./company")
-);
-router.use(
-  "/employees",
-  passport.authenticate("jwt", { session: false }),
-  require("./employees")
-);
-router.use(
-  "/permissions",
-  passport.authenticate("jwt", { session: false }),
-  require("./permissions")
-);
+router.use("/company", Auth, require("./company"));
+router.use("/employees", Auth, require("./employees"));
+router.use("/permissions", Auth, require("./permissions"));
 
 module.exports = router;
