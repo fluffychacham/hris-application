@@ -8,9 +8,9 @@ const router = require("express").Router(),
   } = require("../../controllers/dashboard/employees");
 
 router.post("/create", create);
-router.get("/view", view);
+router.get("/list", view);
 router.put("/update", update);
-router.delete("/remove", remove);
+router.delete("/delete", remove);
 router.use("/", def);
 
 module.exports = router;
